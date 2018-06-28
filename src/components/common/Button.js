@@ -28,7 +28,7 @@ const styles = {
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#007aff',
-        marginHorizontal: 5
+        marginHorizontal: 6
     }
 };
 
