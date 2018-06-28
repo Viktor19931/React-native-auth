@@ -1,65 +1,65 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Button, Header, Spinner } from "./components/common";
-import firebase from 'firebase';
+import {
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+// import firebase from 'firebase';
+import { Header } from "./components/common";
 import LoginForm from "./components/LoginForm";
 
-export default class App extends Component {
-    state = { loggedIn: null };
+export default class App extends Component<Props> {
+    componentWillMount() {
+        this.initializeFirebase();
+    }
 
-  componentWillMount() {
-      firebase.initializeApp({
-          apiKey: "AIzaSyBji7T71j-E3grXhFRQlGQnz2eSU6EF3aE",
-          authDomain: "auth-react-cbf3e.firebaseapp.com",
-          databaseURL: "https://auth-react-cbf3e.firebaseio.com",
-          projectId: "auth-react-cbf3e",
-          storageBucket: "auth-react-cbf3e.appspot.com",
-          messagingSenderId: "449649701681"
-      });
+    initializeFirebase() {
+        const firebase = require("firebase");
 
-      firebase.auth().onAuthStateChanged((user) => {
-        if(user) {
-            this.setState({ loggedIn: true});
-        } else {
-            this.setState({ loggedIn: false});
-        }
-      });
+        // Initialize Firebase
+        const config = {
+            apiKey: "AIzaSyBji7T71j-E3grXhFRQlGQnz2eSU6EF3aE",
+            authDomain: "auth-react-cbf3e.firebaseapp.com",
+            databaseURL: "https://auth-react-cbf3e.firebaseio.com",
+            projectId: "auth-react-cbf3e",
+            storageBucket: "auth-react-cbf3e.appspot.com",
+            messagingSenderId: "449649701681"
+        };
 
-  }
+        firebase.initializeApp(config);
 
-  renderContent() {
-      switch(this.state.loggedIn) {
-          case true:
-              return (
-                  <Button onPress={() => firebase.auth().signOut()}>
-                      Log Out
-                  </Button>
-          );
-          case false:
-              return <LoginForm />
-          default:
-              return (
-                  <View style={styles.spinnerStyle}>
-                      <Spinner size="large"/>
-                  </View>
-              );
-      }
-  }
+        //inicializando o firestore
+        const firestore = require("firebase/firestore");
+        // db = firebase.firestore();
+        // db.settings({ timestampsInSnapshots: true });
+    }
 
-  render() {
-    return (
-      <View>
-        <Header headerText={'Authentication'} />
-          {this.renderContent()}
-      </View>
-    );
-  }
+    render() {
+        return (
+          <View>
+              <Header headerText={'Authentication'} />
+              <LoginForm />
+          </View>
+        );
+    }
+
 }
 
-const styles = {
-    spinnerStyle: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-};
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});

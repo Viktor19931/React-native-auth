@@ -10,6 +10,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
             <TextInput
                 secureTextEntry={secureTextEntry}
                 placeholder={ placeholder }
+                underlineColorAndroid='rgba(0,0,0,0)'
                 value={value}
                 autoCorrect={false}
                 onChangeText={onChangeText}
@@ -25,7 +26,8 @@ const styles = {
         paddingHorizontal: 5,
         fontSize: 18,
         lineHeight: 23,
-        flex: 2
+        flex: 2,
+        borderBottomWidth: 0
     },
     labelStyle: {
         fontSize: 18,

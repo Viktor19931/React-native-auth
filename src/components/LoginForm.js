@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Button, Card, CardSection, Input, Spinner } from "./common";
-import firebase from 'firebase'
 
 export default class LoginForm extends Component {
     state = {
@@ -11,7 +10,10 @@ export default class LoginForm extends Component {
         loading: false
     };
 
+
+
     onButtonPress() {
+        const firebase = require("firebase");
         const { email, password } = this.state;
 
         this.setState({ error: '', isLoading: true });
